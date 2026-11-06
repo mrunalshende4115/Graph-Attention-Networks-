@@ -1,7 +1,6 @@
 Graph Attention Networks for Detecting
 Coordinated and Botnet-Style Attacks in AWS-Style
 Virtual Cloud Networks Using VPC Flow Logs
-
 Overview
 
 This project implements a cloud-native Intrusion Detection System (IDS) using Graph Neural Networks (GNNs) and AWS services. The system captures AWS VPC Flow Logs, preprocesses them using AWS Lambda, performs attack classification using a Graph Attention Network (GAT) model deployed on Amazon EC2, stores predictions in Amazon S3, publishes attack alerts using Amazon SNS, and visualizes security metrics in Amazon CloudWatch.
@@ -63,6 +62,8 @@ scaler.pkl
 SNS Topic: IDSAlerts
 Email
 
+Amazon EventBridge
+Schedules: RunGATBatchInference
 
 Artifacts Saved:
 scaler.pkl
@@ -71,3 +72,18 @@ label_map.json
 gat_model_balanced.pth
 
 Notebook: GAT_Training.ipynb
+
+Architecture:
+IDS2025.csv
+↓
+Amazon S3
+↓
+EventBridge
+↓
+Lambda
+↓
+EC2 GAT Model
+↓
+CloudWatch
+↓
+SNS
